@@ -1,0 +1,7 @@
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+
+input, button {
+  overflow: none !important;
+  box-shadow: none !important;
+}
