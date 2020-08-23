@@ -29,7 +29,7 @@
 
                 <p>Nenhum contato foi criado ainda.</p>
 
-                <button>
+                <button v-b-modal.modal-create-contact>
                   <img src="../assets/images/ic-plus.svg" class="ic_plus">
                   Criar contato
                 </button>
@@ -39,12 +39,21 @@
         </div>
       </div>
     </div>
+
+    <modal-create-contact />
   </div>
 </template>
 
 <script>
+import ModalCreateContact from '@/components/ModalCreateContact'
+
 export default {
-  name: 'Home',
+  name: 'create-contact',
+
+  components: {
+    ModalCreateContact
+  },
+
   data () {
     return {
       text: null
@@ -93,6 +102,7 @@ export default {
       p {
         color: #2a2d3b;
         margin: 20px 0;
+        @include formatText(16px, normal);
       }
       
       button {
@@ -105,6 +115,8 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+        color: #fa7268;
+        @include formatText(14px, 500);
 
         img {
           margin-right: 5px;

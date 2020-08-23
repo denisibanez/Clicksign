@@ -2,6 +2,19 @@
 @import 'node_modules/bootstrap-vue/src/index.scss';
 
 input, button {
-  overflow: none !important;
-  box-shadow: none !important;
+  outline:  none !important;
+
+  &:focus, &:active {
+    outline:  none !important;
+  }
+}
+
+@mixin formatText($size, $weight) {
+  font-family: Roboto;
+  font-size: $size;
+  font-weight: $weight;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
 }
