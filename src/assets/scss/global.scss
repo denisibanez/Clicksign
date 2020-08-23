@@ -9,6 +9,11 @@ input, button {
   }
 }
 
+.create-contact-wrapper {
+  background-color: #f8f9fd;
+  min-height: 100vh;
+}
+
 @mixin formatText($size, $weight) {
   font-family: Roboto;
   font-size: $size;
