@@ -1,23 +1,23 @@
 export default {
   state: {
-    example: null,
+    listData: [],
   },
 
   mutations: {
-    example(state, param) {
-      state.example = param
+    setListData(state, param) {
+      state.listData.push(param)
     },
   },
 
   actions: {
-    example(context, param) {
-      context.commit('example', param)
+    setListData(context, param) {
+      context.commit('setListData', param)
     },
   },
 
   getters: {
-    example: state => {
-      return state.example
+    listData: state => {
+      return state.listData
     },
   }
 }

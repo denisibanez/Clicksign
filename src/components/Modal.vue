@@ -2,8 +2,7 @@
   <b-modal
     :id="idModal"
     :title="title"
-    :ok-title="ok"
-    :cancel-title="cancel">
+    :hide-footer="true">
       <slot name="content"></slot>
   </b-modal>
 </template>
@@ -13,14 +12,6 @@ export default {
   name: 'modal',
 
   props: {
-    ok: {
-      type: String,
-      default: 'Salvar'
-    },
-    cancel: {
-      type: String,
-      default: 'Cancelar'
-    },
     idModal: {
       type: String,
       default: ''
@@ -28,8 +19,8 @@ export default {
     title: {
       type: String,
       default: 'Criar novo contato'
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -50,7 +41,7 @@ export default {
       }
 
       .modal-body {
-        padding: 30px;
+        padding: 0;
       }
 
       .modal-footer {
@@ -62,6 +53,14 @@ export default {
           background-color: transparent;
           border: 0;
           @include formatText(14px, normal);
+
+          &:focus, &:active {
+            background-color: transparent;
+            outline: none;
+            border: 0;
+            color: #fa7268;
+            box-shadow: none !important;
+          }
         }
 
         .btn-primary {
@@ -73,6 +72,15 @@ export default {
           border-radius: 16px;
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16);
           border: solid 1px rgba(255, 255, 255, 0.16);
+
+          &:focus, &:active {
+            background-color: #fa7268;
+            color: #ffffff;
+            outline: none !important;
+            border: 0;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16) !important;
+            border: solid 1px rgba(255, 255, 255, 0.16);
+          }
 
           &:disabled {
             opacity: 0.32;
