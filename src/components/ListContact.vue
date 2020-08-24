@@ -62,10 +62,14 @@ export default {
           width: 50px;
         }
 
-        &:last-child, &:first-child {
+        &:nth-child(5), &:first-child {
           div {
             display: none;
           }
+        }
+
+        &:last-child {
+          display: none;
         }
       }
     }
@@ -82,6 +86,10 @@ export default {
       border: 0;
       color: #2a2d3b;
       @include formatText(14px, normal);
+
+      &:last-child {
+        display: none;
+      }
     }
 
     .buttons {
