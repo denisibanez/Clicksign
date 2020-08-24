@@ -2,7 +2,7 @@
   <div class="container-fluid create-contact-wrapper">
     <div class="row"> 
       <div class="col-md-12">
-        <header-component />
+        <header-component  />
         <div class="create-contact-body">
           <div class="row">
             <div class="col-md-12">
@@ -15,26 +15,7 @@
 
     <modal>
       <template v-slot:content>
-        <b-row class="my-1">
-          <b-col sm="12">
-            <label for="name">Nome</label>
-            <b-form-input id="name" type="text"></b-form-input>
-          </b-col>
-        </b-row>
-
-        <b-row class="my-1">
-          <b-col sm="12">
-            <label for="e-mail">E-mail</label>
-            <b-form-input id="e-mail" type="text"></b-form-input>
-          </b-col>
-        </b-row>
-
-        <b-row class="my-1">
-          <b-col sm="12">
-            <label for="phone">Telefone</label>
-            <b-form-input id="phone" type="text"></b-form-input>
-          </b-col>
-        </b-row>
+        <modal-create-contact :idModal="'modal-create-contact'" />
       </template>
     </modal>
   </div>
@@ -44,6 +25,7 @@
 import HeaderComponent from '@/components/Header'
 import EmptyList from '@/components/EmptyList'
 import Modal from '@/components/Modal'
+import ModalCreateContact from '@/components/ModalCreateContact'
 
 export default {
   name: 'create-contact',
@@ -51,7 +33,8 @@ export default {
   components: {
     Modal,
     EmptyList,
-    HeaderComponent
+    HeaderComponent,
+    ModalCreateContact
   },
 
   data () {
@@ -66,5 +49,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/assets/scss/global.scss';
+
 </style>

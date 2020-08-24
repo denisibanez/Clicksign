@@ -2,7 +2,7 @@
   <div class="container-fluid create-contact-wrapper">
     <div class="row"> 
       <div class="col-md-12">
-        <header-component />
+        <header-component :haveBtn="true"/>
       </div>
     </div>
 
@@ -18,7 +18,7 @@
             <template v-slot:cell(editar)>
               <div class="buttons">
                 <img src="../assets/images/ic-edit.svg" alt="">
-                <img src="../assets/images/ic-delete.svg" alt="">
+                <img src="../assets/images/ic-delete.svg" alt="" @click="showModal('modal-delete-contact')">
               </div>
             </template>
             
@@ -26,19 +26,46 @@
         </div>
       </div>
     </div>
+
+    <modal
+      :idModal="'modal-create-contact'">
+      <template v-slot:content> 
+        <modal-create-contact />
+      </template>
+    </modal>
+
+    <modal
+      :idModal="'modal-delete-contact'"
+      :title="'Excluir contato'"
+      :ok="'Excluir'">
+      <template v-slot:content>
+        <modal-delete-contact />
+      </template>
+    </modal>
+
+    <modal
+      :idModal="'modal-edit-contact'">
+      <template v-slot:content> 
+        <modal-create-contact :typeModal="'edit'" />
+      </template>
+    </modal>
   </div>
 </template>
 
 <script>
 import HeaderComponent from '@/components/Header'
 import Modal from '@/components/Modal'
+import ModalCreateContact from '@/components/ModalCreateContact'
+import ModalDeleteContact from '@/components/ModalDeleteContact'
 
 export default {
   name: 'list-contact',
 
   components: {
     Modal,
-    HeaderComponent
+    HeaderComponent,
+    ModalCreateContact,
+    ModalDeleteContact
   },
 
   data() {
@@ -66,6 +93,12 @@ export default {
           editar: ''
         }
       ]
+    }
+  },
+
+  methods: {
+    showModal(event) {
+      this.$bvModal.show(event)
     }
   }
 }

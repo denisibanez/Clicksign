@@ -1,5 +1,5 @@
 <template>
-  <button class="button" v-b-modal.modal-create-contact>
+  <button class="button" @click="showModal">
     <img src="../assets/images/ic-plus.svg" class="ic_plus">
     Criar contato
   </button>
@@ -8,7 +8,20 @@
 <script>
 
 export default {
-  name: 'button-component'
+  name: 'button-component',
+
+  props: {
+    openModal: {
+      type: String,
+      default: 'modal-create-contact'
+    }
+  },
+
+  methods: {
+    showModal() {
+      this.$bvModal.show(this.openModal)
+    }
+  }
 }
 </script>
 
