@@ -4,8 +4,9 @@
 input, button {
   outline:  none !important;
 
-  &:focus, &:active {
+  &:focus, &:active, &:focus {
     outline:  none !important;
+    box-shadow: none !important;
   }
 }
 

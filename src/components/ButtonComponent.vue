@@ -41,6 +41,15 @@ export default {
   color: #fa7268;
   @include formatText(14px, 500);
 
+  &:focus, &:active {
+    background-color: #dbff90;
+    color:  #fa7268;
+    outline: none !important;
+    border: 0;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16) !important;
+    border: solid 1px rgba(255, 255, 255, 0.16);
+  }
+
   img {
     margin-right: 5px;
   }

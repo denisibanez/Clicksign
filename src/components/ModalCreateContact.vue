@@ -38,7 +38,8 @@
     <div class="modal-footer">
       <button
         type="button"
-        class="btn btn-secondary"> 
+        class="btn btn-secondary"
+        @click="$bvModal.hide('modal-create-contact')"> 
         {{ cancel }}
       </button>
       <button
@@ -105,6 +106,7 @@ export default {
         id: 0
       }
       this.setListData(formatItem)
+      this.$bvModal.hide('modal-create-contact')
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
-  <div class="list-contact-wrapper">
-    <b-table hover :items="listData">
+  <div class="list-contact-wrapper">{{highlite}}
+    <b-table hover :items="listData" :class="{ 'highlite' : highlite }">
       <template v-slot:cell(prevent)>
         <div class="prevent">
           <span>A</span>
@@ -25,7 +25,8 @@ export default {
 
   computed: {
     ...mapGetters({
-      listData: 'listData'
+      listData: 'listData',
+      highlite: 'highlite'
     })
   },
 
@@ -114,6 +115,17 @@ export default {
         @include formatText(16px, normal);
       }
     }
+  }
+
+  .highlite {
+   tbody {
+    tr {
+
+      &:last-child {
+        background-color: #fff3f2
+      }
+    }
+   }
   }
 }
 </style>

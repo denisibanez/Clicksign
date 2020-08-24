@@ -5,8 +5,14 @@
     </div>
 
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary"> {{ cancel }}</button>
-      <button type="button" class="btn btn-primary">{{ ok }}</button>
+      <button
+        type="button"
+        class="btn btn-secondary"
+        @click="$bvModal.hide('modal-delete-contact')"> {{ cancel }}</button>
+      <button 
+        type="button"
+        class="btn btn-primary"
+        @click="submit">{{ ok }}</button>
     </div>
   </div>
 </template>
@@ -24,6 +30,12 @@ export default {
       type: String,
       default: 'Cancelar'
     },
+  },
+
+  methods: {
+    submit() {
+      this.$bvModal.hide('modal-delete-contact')
+    }
   }
 }
 </script>
