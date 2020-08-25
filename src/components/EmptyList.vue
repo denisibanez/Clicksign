@@ -22,8 +22,8 @@ export default {
 <style lang="scss">
 @import '@/assets/scss/global.scss';
 .create-contact-body {
-  margin: 100px 0;
   .create-contact-content {
+    margin: 100px 0;
     display: flex;
     justify-content: center;
     flex-direction: column;

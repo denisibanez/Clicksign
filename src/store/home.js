@@ -2,16 +2,56 @@ export default {
   state: {
     listData: [],
     highlite: false,
+    selectedItem: [],
+    controlRefresh: false,
+    search: null
   },
 
   mutations: {
     setListData(state, param) {
       state.listData.push(param)
+      sessionStorage.setItem('data', JSON.stringify(state.listData))
+    },
+
+    removeListItem(state, param) {
+      state.listData = param
+      sessionStorage.setItem('data', JSON.stringify(state.listData))
+    },
+
+    updateItemModal(state, param) {
+      state.listData.map(item => {
+        debugger
+        if(item.id == param.id) {
+          item.prevent = param.prevent,
+          item.contatos = param.contatos,
+          item.email = param.email,
+          item.telefone = param.telefone,
+          item.editar = param.editar,
+          item.id = param.id
+          sessionStorage.setItem('data', JSON.stringify(state.listData))
+        }
+      })
+    },
+
+    updateControlRefresh(state, param) {
+      state.controlRefresh = param
+    },
+
+    selectedItem(state, param) {
+      state.selectedItem = param
     },
 
     setHighlite(state, param) {
       state.highlite = param
     },
+
+    getSession(state, param) {
+      state.listData = param
+    },
+
+    updateSearch(state, param) {
+      state.search = param
+    }
   },
 
   actions: {
@@ -21,10 +61,36 @@ export default {
       context.dispatch('setHighlite', false)
     },
 
+    selectedItem(context, param) {
+      context.commit('selectedItem', param)
+    },
+
+    removeListItem(context, param) {
+      context.commit('removeListItem', param)
+      context.commit('updateControlRefresh', true)
+    },
+
+    updateControlRefresh(context, param) {
+      context.commit('updateControlRefresh', param)
+    },
+
     setHighlite(context) {
       setTimeout(() => {
         context.commit('setHighlite', false)
       }, 10000)
+    },
+
+    getSession(context) {
+      const sessionData = JSON.parse(sessionStorage.getItem('data'))
+      if(sessionData) context.commit('getSession', sessionData)
+    },
+
+    updateSearch(context, param) {
+      context.commit('updateSearch', param)
+    },
+
+    updateItemModal(context, param) {
+      context.commit('updateItemModal', param)
     }
   },
 
@@ -35,6 +101,18 @@ export default {
 
     highlite: state => {
       return state.highlite
+    },
+
+    selectedItem: state => {
+      return state.selectedItem
+    },
+
+    controlRefresh: state => {
+      return state.controlRefresh
+    },
+
+    search: state => {
+      return state.search
     },
   }
 }

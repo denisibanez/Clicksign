@@ -1,19 +1,27 @@
 <template>
-  <div class="list-contact-wrapper">{{highlite}}
-    <b-table hover :items="listData" :class="{ 'highlite' : highlite }">
+  <div class="list-contact-wrapper">
+    <b-table
+      v-if="searchByParam.length"
+      hover
+      :items="searchByParam"
+      :class="{ 'highlite' : highlite }"
+      ref="selectableTable">
       <template v-slot:cell(prevent)>
         <div class="prevent">
           <span>A</span>
         </div>
       </template>
-      <template v-slot:cell(editar)>
+      <template v-slot:cell(editar)="row">
         <div class="buttons">
-          <img src="../assets/images/ic-edit.svg" alt="" @click="showModal('modal-edit-contact')">
-          <img src="../assets/images/ic-delete.svg" alt="" @click="showModal('modal-delete-contact')">
+          <img src="../assets/images/ic-edit.svg" alt="" @click="info(row.item, row.index, $event.target, 'modal-edit-contact')">
+          <img src="../assets/images/ic-delete.svg" alt="" @click="info(row.item, row.index, $event.target, 'modal-delete-contact')">
         </div>
-      </template>
-      
+      </template>      
     </b-table>
+
+    <b-alert v-else show variant="warning">
+      Não encontramos nenhum resultado. :(
+    </b-alert>
   </div>
 </template>
 
@@ -23,17 +31,46 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'list-contact',
 
+  data() {
+    return {
+      selected: []
+    }
+  },
+
   computed: {
     ...mapGetters({
       listData: 'listData',
-      highlite: 'highlite'
-    })
+      highlite: 'highlite',
+      search: 'search',
+    }),
+
+    searchByParam() {
+      if(this.listData && this.search) {
+        let items = []
+        this.listData.filter(item => {
+          const _self = this
+          let contains = item.contatos.toLowerCase().includes(_self.search.toLowerCase())
+          if(contains) items.push(item)
+        })  
+        return items
+      } else {
+        return this.listData
+      }
+    },
   },
 
   methods: {
-    showModal(event) {
-      this.$bvModal.show(event)
-    }
+    ...mapActions({
+      updateSelectedITem: 'selectedItem'
+    }),
+
+    info(item,index, target, idModal) {
+      this.selected = []
+      this.selected = item
+      
+      this.updateSelectedITem(this.selected)
+      this.$bvModal.show(idModal)
+    },
   }
 }
 </script>
@@ -79,7 +116,7 @@ export default {
       border: 1px solid #e1e1e1;
 
       &:hover {
-        background-color: #fff3f2
+        background-color: #fff3f2;
       }
     }
 

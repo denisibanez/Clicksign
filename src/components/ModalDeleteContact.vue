@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   name: 'modal-delete-contact',
 
@@ -32,9 +34,26 @@ export default {
     },
   },
 
+   computed: {
+    ...mapGetters({
+      listData: 'listData',
+      selectedItem: 'selectedItem'
+    })
+  },
+
   methods: {
+    ...mapActions({
+      removeListItem: 'removeListItem'
+    }),
+
     submit() {
+      const listsNew = this.listData.filter(x => {
+        return x.id != this.selectedItem.id;
+      })
+
+      this.removeListItem(listsNew)
       this.$bvModal.hide('modal-delete-contact')
+     
     }
   }
 }

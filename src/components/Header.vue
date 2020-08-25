@@ -11,7 +11,7 @@
       </div>
 
       <div class="col-md-8">
-        <div class="create-contact-search">
+        <div class="create-contact-search" v-if="listData.length">
           <b-input-group-prepend>
             <b-form-input v-model="text" placeholder="Buscar ..."></b-form-input>
             <b-icon-search></b-icon-search>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import ButtonComponent from '@/components/ButtonComponent'
 
 export default {
@@ -42,6 +43,24 @@ export default {
     haveBtn: {
       type: Number,
       default: 0
+    }
+  },
+
+  computed: {
+    ...mapGetters({
+      listData: 'listData'
+    })
+  },
+
+  methods: {
+    ...mapActions({
+      updateSearch: 'updateSearch'
+    }),
+  },
+
+  watch: {
+    text(value) {
+      this.updateSearch(value)
     }
   }
 }

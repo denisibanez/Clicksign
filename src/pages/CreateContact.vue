@@ -66,6 +66,16 @@ export default {
       listData: 'listData'
     })
   },
+
+  created() {
+    this.getSession()
+  },
+
+  methods: {
+    ...mapActions({
+      getSession: 'getSession'
+    }),
+  }
 }
 </script>
 

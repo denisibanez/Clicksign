@@ -39,7 +39,7 @@
       <button
         type="button"
         class="btn btn-secondary"
-        @click="$bvModal.hide('modal-create-contact')"> 
+        @click="$bvModal.hide(idModal)"> 
         {{ cancel }}
       </button>
       <button
@@ -87,27 +87,76 @@ export default {
         phone: {
           text: ''
         },
-      }
+      },
+
+      idModal: ''
     }
+  },
+
+  created() {
+    if(this.typeModal == 'edit') {
+      const _self = this
+      const recoverItem = this.listData.filter((item) => {
+        if(item.id == _self.selectedItem.id) return item
+      })
+      this.form = {
+        name: {
+          text: recoverItem[0].contatos
+        },
+        mail: {
+          text: recoverItem[0].email
+        },
+        phone: {
+          text: recoverItem[0].telefone
+        }
+      }
+
+      this.idModal = 'modal-edit-contact'
+    } else {
+      this.idModal = 'modal-create-contact'
+    }
+  },
+
+  computed: {
+    ...mapGetters({
+      listData: 'listData',
+      selectedItem: 'selectedItem'
+    })
   },
 
   methods: {
     ...mapActions({
-      setListData: 'setListData'
+      setListData: 'setListData',
+      updateItemModal: 'updateItemModal'
     }),
 
     submit() {
+      
+      let number = Math.random()
+      number.toString(36)
+      let id = number.toString(36).substr(2, 9)
+      let idCheck = this.typeModal == 'edit' ? this.selectedItem.id : id
       const formatItem = {
         prevent: '',
         contatos: this.form.name.text,
         email: this.form.mail.text,
         telefone: this.form.phone.text,
         editar: '',
-        id: 0
+        id: idCheck
       }
+      if(this.typeModal == 'create') this.createItem(formatItem)
+      else if (this.typeModal == 'edit') this.editItem(formatItem)
+    },
+
+    createItem(formatItem) {
       this.setListData(formatItem)
-      this.$bvModal.hide('modal-create-contact')
-    }
+      this.$bvModal.hide(this.idModal)
+    },
+
+    editItem(formatItem) {
+      this.updateItemModal(formatItem)
+      this.$bvModal.hide(this.idModal)
+    },
   }
 }
 </script>
