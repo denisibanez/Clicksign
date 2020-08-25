@@ -20,7 +20,6 @@ export default {
 
     updateItemModal(state, param) {
       state.listData.map(item => {
-        debugger
         if(item.id == param.id) {
           item.prevent = param.prevent,
           item.contatos = param.contatos,

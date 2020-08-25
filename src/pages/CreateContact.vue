@@ -9,6 +9,10 @@
             <div class="col-md-12">
               <empty-list v-if="!listData.length"/>
               <list-contact v-else/>
+
+              <b-alert show variant="success" v-if="controlAlert == 'created'">Contato criado com sucesso.</b-alert>
+              <b-alert show variant="success" v-if="controlAlert == 'edit'">Contato editado com sucesso.</b-alert>
+              <b-alert show variant="success" v-if="controlAlert == 'delete'">Contato removido com sucesso.</b-alert>
             </div>
           </div>
         </div>
@@ -18,7 +22,7 @@
     <modal
       :idModal="'modal-create-contact'">
       <template v-slot:content> 
-        <modal-create-contact />
+        <modal-create-contact @createdSuccess="[controlAlert = 'created', resetControlAlert()]"/>
       </template>
     </modal>
 
@@ -26,7 +30,7 @@
       :idModal="'modal-delete-contact'"
       :title="'Excluir contato'">
       <template v-slot:content>
-        <modal-delete-contact />
+        <modal-delete-contact @deleteSuccess="[controlAlert = 'delete', resetControlAlert()]" />
       </template>
     </modal>
 
@@ -34,7 +38,7 @@
       :idModal="'modal-edit-contact'"
       :title="'Editar contato'">
       <template v-slot:content> 
-        <modal-create-contact :typeModal="'edit'" />
+        <modal-create-contact :typeModal="'edit'" @editSuccess="[controlAlert = 'edit', resetControlAlert()]" />
       </template>
     </modal>
   </div>
@@ -61,6 +65,12 @@ export default {
     ListContact
   },
 
+  data() {
+    return {
+      controlAlert: ''
+    }
+  },
+
   computed: {
     ...mapGetters({
       listData: 'listData'
@@ -75,6 +85,12 @@ export default {
     ...mapActions({
       getSession: 'getSession'
     }),
+
+    resetControlAlert() {
+      setTimeout(() => {
+        this.controlAlert = ''
+      },3000)
+    }
   }
 }
 </script>

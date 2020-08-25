@@ -6,9 +6,9 @@
       :items="searchByParam"
       :class="{ 'highlite' : highlite }"
       ref="selectableTable">
-      <template v-slot:cell(prevent)>
-        <div class="prevent">
-          <span>A</span>
+      <template v-slot:cell(prevent)="data">
+        <div class="prevent" :style="{ background: data.value.color }">
+          <span style="text-transform: uppercase;">{{ data.value.item }}</span>
         </div>
       </template>
       <template v-slot:cell(editar)="row">

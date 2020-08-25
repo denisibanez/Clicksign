@@ -53,7 +53,7 @@ export default {
 
       this.removeListItem(listsNew)
       this.$bvModal.hide('modal-delete-contact')
-     
+      this.$emit('deleteSuccess')
     }
   }
 }

@@ -6,6 +6,10 @@ import router from './router'
 import Vuex from 'vuex'
 import store from './store/index'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import './vee-validate';
+
+import VueTheMask from 'vue-the-mask'
+Vue.use(VueTheMask)
 
 // Install BootstrapVue
 Vue.use(BootstrapVue)
