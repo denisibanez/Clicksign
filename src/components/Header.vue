@@ -1,7 +1,7 @@
 <template>
   <div class="create-contact-header">
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-12 col-lg-4">
         <div class="create-contact-logo">
           <router-link to="/">
             <img src="../assets/images/ic-logo.svg" alt="">
@@ -10,7 +10,7 @@
         </div>
       </div>
 
-      <div class="col-md-8">
+      <div class="col-12 col-lg-8">
         <div class="create-contact-search" v-if="listData.length">
           <b-input-group-prepend>
             <b-form-input v-model="text" placeholder="Buscar ..."></b-form-input>
@@ -94,6 +94,14 @@ export default {
       position: absolute;
       right: 25px;
       top: 7px;
+    }
+  }
+}
+
+@media(max-width: 768px) {
+  .create-contact-header {
+    .create-contact-logo {
+      margin-bottom: 25px;
     }
   }
 }

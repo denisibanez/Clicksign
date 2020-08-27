@@ -5,7 +5,8 @@
       hover
       :items="searchByParam"
       :class="{ 'highlite' : highlite }"
-      ref="selectableTable">
+      ref="selectableTable"
+      responsive="md">
       <template v-slot:cell(prevent)="data">
         <div class="prevent" :style="{ background: data.value.color }">
           <span style="text-transform: uppercase;">{{ data.value.item }}</span>
